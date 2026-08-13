@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Secrets and local configuration
+.env
+*.pem
+*.key
+credentials*.json
+service-account*.json
+config/paths.local.yaml
+
+# Large/raw research assets
+*.zarr/
+*.parquet
+*.tif
+*.tiff
+*.shp
+*.shx
+*.dbf
+*.gpkg
+raw_data/
+intermediate/
+model_input/
+
+# Generated outputs (PNG previews committed intentionally)
+results/figures/*.pdf
+results/figures/*.svg

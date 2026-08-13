@@ -1,0 +1,75 @@
+﻿{
+  "spec_version": "baseline-repair-audit-v1.0",
+  "frozen_date": "2026-08-10",
+  "project_root": "${HOT_DRY_PROJECT_ROOT}",
+  "output_root": "${HOT_DRY_PROJECT_ROOT}/stage6_baseline_repair_audit",
+  "source_run": "stage1_window_baseline/results/fixed_window_runs/fixed_window_v01",
+  "primary_exposure": {
+    "gap_days": 0,
+    "event_min_days": 3,
+    "event_column": "event_3d_occurrence",
+    "dose_column": "event_3d_cumulative_days",
+    "complete_windows_only": true,
+    "latitude_min_inclusive": 20.0,
+    "latitude_max_exclusive": 60.0
+  },
+  "reference_baseline": {
+    "name": "legacy_moving_event_non_event_loo",
+    "role": "reference_only",
+    "outcome_columns": ["anomaly_crossfit", "abs_anomaly_crossfit"]
+  },
+  "candidates": [
+    {
+      "name": "all_year_linear_loo",
+      "role": "primary_repair",
+      "uses_event_labels": false,
+      "linear_min_training_years": 8,
+      "fallback": "mean_all_other_valid_years"
+    },
+    {
+      "name": "fixed_event_non_event_loo",
+      "role": "sensitivity",
+      "uses_event_labels": true,
+      "event_column": "event_3d_occurrence",
+      "linear_min_non_event_training_years": 8,
+      "mean_min_non_event_training_years": 3,
+      "fallback": "mean_all_other_valid_years"
+    }
+  ],
+  "frozen_model_contract": {
+    "latitude_spline_df": 4,
+    "dose_spline_df": 3,
+    "dose_contrast": [3, 10],
+    "key_latitudes": [25, 35, 45, 55],
+    "weight": "n_pixels * overlap_weight",
+    "cluster": "era_cell_id",
+    "spatial_bootstrap": {
+      "method": "Rademacher spatial-block score bootstrap",
+      "replicates": 999,
+      "seed": 20260807,
+      "block_degrees": [5, 10],
+      "minimum_success_fraction": 0.95
+    }
+  },
+  "claims_to_audit": ["C002", "C003", "C004", "C005", "C006", "C007", "C008", "C009"],
+  "stability_rules": {
+    "direction_must_match": true,
+    "clustered_zero_exclusion_class_must_match": true,
+    "spatial_5deg_zero_exclusion_class_must_match": true,
+    "spatial_10deg_zero_exclusion_class_must_match": true,
+    "material_numeric_drift_requires_both": {
+      "absolute_days_at_least": 1.0,
+      "relative_fraction_at_least": 0.20
+    },
+    "maximum_eligible_pixel_loss_fraction": 0.01,
+    "maximum_model_failures": 0
+  },
+  "decision": {
+    "primary_candidate": "all_year_linear_loo",
+    "stable_label": "stable_storyline",
+    "escalate_label": "full_refreeze_required",
+    "stable_next_scope": "adopt corrected values; repair Methods; complete primary and sensitivity tables; add precipitation display; refresh affected manuscript numbers and figures without redesigning the storyline",
+    "escalated_next_scope": "rerun all six window definitions and downstream Stage 2-4 analyses; refreeze B1-B2 evidence; regenerate affected manuscript text and D2 figures"
+  }
+}
+

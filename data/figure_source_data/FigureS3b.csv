@@ -1,0 +1,13 @@
+gap_days,event_min_days,pheno_type,robust_latitudes,audited_latitudes
+0,3,EOS,1,4
+0,3,SOS,0,4
+0,5,EOS,1,4
+0,5,SOS,2,4
+8,3,EOS,0,4
+8,3,SOS,0,4
+8,5,EOS,1,4
+8,5,SOS,2,4
+16,3,EOS,0,4
+16,3,SOS,0,4
+16,5,EOS,2,4
+16,5,SOS,2,4

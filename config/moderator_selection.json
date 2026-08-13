@@ -1,0 +1,28 @@
+{
+  "spec_version": "A4.2-v1.0",
+  "frozen_date": "2026-08-07",
+  "outcomes_inspected": false,
+  "primary_moderator_axes": {
+    "background_water_limitation": "precip_annual_mm",
+    "vegetation_structure": "lc_forest_frac"
+  },
+  "sensitivity_alternatives": {
+    "background_water_limitation": "vpd_mean",
+    "vegetation_structure": "veg_frac_mean"
+  },
+  "structural_terms": [
+    "latitude",
+    "elevation_m"
+  ],
+  "not_primary": {
+    "continuous_landscape_intensity": "Not selected: study PA/UA fractions define the landscape groups and have non-comparable scales; MCD12Q1 urban fraction has weak PA support and is compositionally tied to UA.",
+    "precip_seasonality_cv": "Exploratory only."
+  },
+  "modeling_constraints": [
+    "Fit one moderator family at a time.",
+    "Retain the moderator main effect and the frozen A2-LC adjustment set.",
+    "Do not treat latitude as an ecological mechanism.",
+    "Use continuous curves over observed support; no outcome-driven cut points.",
+    "Do not jointly label VPD and precipitation as independent primary mechanisms."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "spec_version": "A4.1-v1.0",
+  "frozen_date": "2026-08-07",
+  "claim_type": "observational association",
+  "construct": "phenological resistance of timing",
+  "modelled_outcome": "abs_anomaly_crossfit",
+  "reporting_transform": "multiply the complete absolute-anomaly exposure contrast and its interval endpoints by -1, reversing endpoint order",
+  "positive_direction": "greater relative resistance; absolute phenological deviation is smaller or increases less under higher exposure",
+  "negative_direction": "loss of resistance; absolute phenological deviation is larger under higher exposure",
+  "primary_estimand": {
+    "name": "occurrence-based resistance",
+    "population": "all eligible event and non-event years",
+    "gap_days": 0,
+    "event_min_days": 3,
+    "contrast": "event 1 minus event 0, multiplied by -1"
+  },
+  "secondary_estimand": {
+    "name": "conditional dose-based resistance",
+    "population": "eligible event years only",
+    "gap_days": 0,
+    "event_min_days": 3,
+    "dose_metric": "cumulative_days",
+    "contrast_low": 3,
+    "contrast_high": 10,
+    "contrast": "dose 10 minus dose 3, multiplied by -1"
+  },
+  "companion_outcome": {
+    "name": "signed cross-fitted anomaly",
+    "role": "direction of timing shift only; not the resistance measure"
+  },
+  "target_population": {
+    "latitude_min_inclusive": 20,
+    "latitude_max_exclusive": 60,
+    "years": [2001, 2024],
+    "complete_fixed_windows": true,
+    "valid_stage2b_landcover_common_support": true
+  },
+  "contrast_hierarchy": [
+    "within-landscape moderator heterogeneity",
+    "UA-minus-PA resistance at fixed moderator values",
+    "UA-minus-PA difference in moderator heterogeneity"
+  ],
+  "key_latitudes": [25, 35, 45, 55],
+  "primary_model_framework": "overlap-weighted land-cover-adjusted clustered model",
+  "cluster": "era_cell_id",
+  "spatial_blocks_degrees": [5, 10],
+  "moderator_rule": "freeze no more than three primary axes from predictor-only measurement, support and collinearity audits",
+  "prohibited_equivalences": [
+    "resistance is not resilience or recovery",
+    "absolute anomaly is not physiological tolerance",
+    "landscape association is not causal effect of urbanization or protection",
+    "land-cover moderation is not proof of a canopy or biodiversity mechanism"
+  ]
+}
+

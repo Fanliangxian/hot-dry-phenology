@@ -1,0 +1,7 @@
+step,title,definition
+1,Leave-one-year-out anchor,Phenology baseline excludes the focal year
+2,Fixed 90-day window,Exposure precedes the cross-fitted anchor
+3,Occurrence and dose,Qualifying event and cumulative event days
+4,Cross-fitted anomaly,Signed and absolute SOS/EOS departures
+5,Overlap-weighted model,Common-support adjusted association
+6,Spatial sensitivity,"Clustered, 5° and 10° block intervals"

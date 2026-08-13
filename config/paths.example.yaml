@@ -1,0 +1,7 @@
+# Copy to paths.local.yaml if a wrapper script needs explicit paths.
+# paths.local.yaml is ignored by Git.
+project_root: /path/to/analysis-workspace
+era5_daily_zarr: /path/to/ERA5_daily_cells.zarr
+phenology_data: /path/to/phenology-data
+mcd12q1_exports: /path/to/gee-downloads
+natural_earth_shapefile: /path/to/naturalearth_lowres.shp

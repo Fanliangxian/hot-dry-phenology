@@ -1,0 +1,13 @@
+spec_version,baseline,gap_days,event_min_days,pheno_type,strategy,test,statistic,df_constraint,p_value,p_value_bh,bh_family
+baseline-full-propagation-v1.0,all_year_linear_loo,0,3,SOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,4.736870446113891,4,0.3153768796385144,0.3153768796385144,primary_final_strategy_2
+baseline-full-propagation-v1.0,all_year_linear_loo,0,3,EOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,43.14911510640884,4,9.6362476399817e-09,1.92724952799634e-08,primary_final_strategy_2
+baseline-full-propagation-v1.0,all_year_linear_loo,0,5,SOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,1.6189828560027042,4,0.8053763452294064,0.8948626058104515,window_sensitivity_final_strategy_10
+baseline-full-propagation-v1.0,all_year_linear_loo,0,5,EOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,28.105115992442688,4,1.1875773742028013e-05,2.3751547484056026e-05,window_sensitivity_final_strategy_10
+baseline-full-propagation-v1.0,all_year_linear_loo,8,3,SOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,7.478882904188989,4,0.1126440805852725,0.1609201151218179,window_sensitivity_final_strategy_10
+baseline-full-propagation-v1.0,all_year_linear_loo,8,3,EOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,40.821551190346206,4,2.9264774859740088e-08,9.754924953246697e-08,window_sensitivity_final_strategy_10
+baseline-full-propagation-v1.0,all_year_linear_loo,8,5,SOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,0.6723504312707579,4,0.9546943904719128,0.9546943904719128,window_sensitivity_final_strategy_10
+baseline-full-propagation-v1.0,all_year_linear_loo,8,5,EOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,39.30756331644805,4,6.018256019048823e-08,1.5045640047622056e-07,window_sensitivity_final_strategy_10
+baseline-full-propagation-v1.0,all_year_linear_loo,16,3,SOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,10.051621940909389,4,0.0395670372816181,0.0659450621360301,window_sensitivity_final_strategy_10
+baseline-full-propagation-v1.0,all_year_linear_loo,16,3,EOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,44.83293341460563,4,4.306987095777853e-09,2.1534935478889264e-08,window_sensitivity_final_strategy_10
+baseline-full-propagation-v1.0,all_year_linear_loo,16,5,SOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,2.4674655989678613,4,0.650470902953469,0.8130886286918362,window_sensitivity_final_strategy_10
+baseline-full-propagation-v1.0,all_year_linear_loo,16,5,EOS,overlap_weighted_adjusted,latitude_varying_UA_minus_PA,52.835662222161126,4,9.223905003429239e-11,9.22390500342924e-10,window_sensitivity_final_strategy_10

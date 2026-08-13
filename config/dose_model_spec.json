@@ -1,0 +1,119 @@
+{
+  "spec_version": "A3.2-v1.0",
+  "frozen_date": "2026-08-07",
+  "domain": {
+    "latitude_min_inclusive": 20.0,
+    "latitude_max_exclusive": 60.0,
+    "years": [2001, 2024],
+    "complete_windows_only": true,
+    "event_years_only": true
+  },
+  "primary": {
+    "gap_days": 0,
+    "event_min_days": 3,
+    "dose_metric": "cumulative_days",
+    "dose_column": "event_3d_cumulative_days",
+    "dose_spline_df": 3,
+    "latitude_spline_df": 4,
+    "contrast_low": 3,
+    "contrast_high": 10,
+    "latitudes": [25.0, 35.0, 45.0, 55.0],
+    "outcomes": ["mean_anomaly_crossfit", "mean_abs_anomaly_crossfit"],
+    "strategy": "overlap_weighted_landcover_adjusted"
+  },
+  "metric_families": [
+    {
+      "event_min_days": 3,
+      "metric": "cumulative_days",
+      "low": 3,
+      "high": 10,
+      "role": "primary when gap_days=0; gap sensitivity otherwise"
+    },
+    {
+      "event_min_days": 3,
+      "metric": "max_duration",
+      "low": 3,
+      "high": 7,
+      "role": "persistence sensitivity"
+    },
+    {
+      "event_min_days": 5,
+      "metric": "cumulative_days",
+      "low": 5,
+      "high": 7,
+      "role": "event-definition sensitivity"
+    },
+    {
+      "event_min_days": 5,
+      "metric": "max_duration",
+      "low": 5,
+      "high": 8,
+      "role": "event-definition and persistence sensitivity"
+    }
+  ],
+  "shape_models": {
+    "primary": "natural cubic regression spline with 3 centred degrees of freedom for dose",
+    "shape_sensitivity": "linear dose term",
+    "selection_rule": "do not select between shapes by significance or fit; spline is primary and linear is sensitivity"
+  },
+  "outcome_formula": "outcome ~ cr(latitude, df=4, constraints='center') * cr(dose, df=3, constraints='center') * C(landscape_type) + year_c + covariates",
+  "covariates": [
+    "cr(veg_frac_mean, df=3, constraints='center')",
+    "tmax_mean_z",
+    "tmax_sd_z",
+    "vpd_mean_z",
+    "vpd_sd_z",
+    "cr(log_precip_annual_z, df=3, constraints='center')",
+    "precip_seasonality_z",
+    "cr(elevation_z, df=3, constraints='center')",
+    "sin_lon",
+    "cos_lon",
+    "lc_forest_frac",
+    "lc_shrubland_frac",
+    "lc_savanna_frac",
+    "lc_wetland_frac",
+    "lc_cropland_frac",
+    "lc_urban_frac",
+    "lc_snow_frac",
+    "lc_barren_frac",
+    "lc_water_frac"
+  ],
+  "weights": "n_pixels * overlap_weight",
+  "cluster": "era_cell_id",
+  "global_tests": [
+    "overall_dose_association: all terms containing the dose basis",
+    "landscape_modification_of_dose: all dose-by-landscape and latitude-by-dose-by-landscape terms",
+    "latitude_varying_landscape_modification: latitude-by-dose-by-landscape terms only"
+  ],
+  "multiplicity": {
+    "primary_global": "BH separately for each outcome and each global-test label across SOS and EOS (2 tests per family)",
+    "primary_local_landscape_contrasts": "BH separately by outcome across 2 phenophases x 4 latitudes (8 tests)",
+    "primary_within_landscape_contrasts": "BH separately by outcome across 2 phenophases x 4 latitudes x 2 landscapes (16 tests)",
+    "sensitivity_global_landscape_tests": "BH separately by outcome across all 22 non-primary metric-window-phenophase models"
+  },
+  "boundary_sensitivity": {
+    "main": "retain every qualifying event year and use actual within-window overlap dose",
+    "sensitivity": "exclude records with max_duration below event_min_days"
+  },
+  "spatial_bootstrap": {
+    "method": "Rademacher spatial-block score bootstrap",
+    "replicates": 999,
+    "seed": 20260807,
+    "block_degrees": [5, 10],
+    "scope": "primary gap-0 three-day cumulative-dose spline models only",
+    "contrasts": "high-minus-low within PA and UA and UA-minus-PA difference at 25, 35, 45 and 55N"
+  },
+  "curve_display": {
+    "grid_step_days": 0.25,
+    "bounds": "phenophase-specific pooled event-year P01 to P99",
+    "support_overlay": "show weighted or raw dose distribution beneath every curve",
+    "extrapolation": "prohibited outside display bounds"
+  },
+  "failure_rules": [
+    "If spline design is rank deficient, verify data and term construction; do not reduce df based on outcome P values.",
+    "If a prespecified contrast has fewer than 100 raw event records or 30 ERA5 cells in any landscape-by-10-degree band, do not report that local contrast.",
+    "If clustered covariance fails, record the model as failed; do not substitute naive standard errors.",
+    "If spatial bootstrap has fewer than 95 percent successful replicates, report it as failed and diagnose before interpretation.",
+    "If spline and linear models differ materially in sign over well-supported dose values, label the curve shape-sensitive."
+  ]
+}
